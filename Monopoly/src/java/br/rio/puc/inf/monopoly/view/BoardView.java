@@ -1,7 +1,10 @@
 package br.rio.puc.inf.monopoly.view;
 
+import br.rio.puc.inf.monopoly.model.Board;
+import br.rio.puc.inf.monopoly.model.BoardSquare;
+import br.rio.puc.inf.monopoly.model.Pawn;
+
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -56,7 +59,8 @@ public class BoardView
 
 		try
 		{
-			final BufferedImage image = ImageIO.read( new File( "images/tabuleiro.png" ) );
+			final Board board = new Board();
+			final BufferedImage image = ImageIO.read( new File( board.getImagePath() ) );
 
 			final Graphics2D g = ( Graphics2D ) g1;
 			final Dimension size = getSize();
@@ -64,12 +68,40 @@ public class BoardView
 			// as coordenadas não são mais em pixels, mas relativas ao plano cartesiano definido
 			// acima
 			g.drawImage( image, null, 0, 0 );
+			for ( final BoardSquare boardSquare : board.getBoardSquareList() )
+			{
+				final int initX = boardSquare.getInitialXPosition();
+				final int initY = boardSquare.getInitialYPosition();
+				final int finalX = boardSquare.getFinalXPosition();
+				final int finalY = boardSquare.getFinalYPosition();
 
-			g.setColor( Color.yellow );
-			g.drawOval( 75, 50, 21, 21 );
-			g.setColor( Color.red );
-			g.fillOval( 75 + 1, 50, 20, 20 );
-			g.dispose();
+				final int xLength = finalX - initX;
+				final int yLength = finalY - initY;
+
+				final int xDiff = xLength / 3;
+				final int yDiff = yLength / 2;
+				int x = initX;
+				int y = initY;
+				int count = 1;
+				for ( final Pawn pawn : boardSquare.getPawnList() )
+				{
+					g.setColor( pawn.getColor() );
+					g.fillOval( x + 2, y + 4, 25, 25 );
+
+					count++;
+					if ( count <= 3 )
+					{
+						x += xDiff;
+					}
+					else
+					{
+						count = 1;
+						x = initX;
+						y += yDiff;
+					}
+				}
+				g.dispose();
+			}
 
 		}
 		catch ( final IOException e )

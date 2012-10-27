@@ -12,6 +12,11 @@ import java.awt.Color;
 public class Pawn
 {
 
+	public Pawn()
+	{
+		setBoardSquarePosition( 0 );
+	}
+
 	/**
 	 * <p>
 	 * </p>
@@ -21,6 +26,11 @@ public class Pawn
 	public Pawn( final Color color )
 	{
 		setColor( color );
+	}
+
+	public int getBoardSquarePosition()
+	{
+		return this.boardSquarePosition;
 	}
 
 	/**
@@ -34,6 +44,11 @@ public class Pawn
 		return this.color;
 	}
 
+	public void setBoardSquarePosition( final int boardSquarePosition )
+	{
+		this.boardSquarePosition = boardSquarePosition;
+	}
+
 	/**
 	 * <p>
 	 * </p>
@@ -44,6 +59,8 @@ public class Pawn
 	{
 		this.color = color;
 	}
+
+	private int boardSquarePosition;
 
 	/**
 	 * <p>

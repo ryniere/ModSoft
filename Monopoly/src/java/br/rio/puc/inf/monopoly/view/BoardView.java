@@ -44,9 +44,15 @@ public class BoardView
 	 * <p>
 	 * </p>
 	 */
-	public BoardView()
+	public BoardView( final Board board )
 	{
 		super();
+		setBoard( board );
+	}
+
+	public Board getBoard()
+	{
+		return this.board;
 	}
 
 	/**
@@ -59,7 +65,7 @@ public class BoardView
 
 		try
 		{
-			final Board board = new Board();
+			final Board board = getBoard();
 			final BufferedImage image = ImageIO.read( new File( board.getImagePath() ) );
 
 			final Graphics2D g = ( Graphics2D ) g1;
@@ -70,6 +76,18 @@ public class BoardView
 			g.drawImage( image, null, 0, 0 );
 			for ( final BoardSquare boardSquare : board.getBoardSquareList() )
 			{
+				int xPawns;
+				int yPawns;
+				if ( boardSquare.isHorizontalSquare() )
+				{
+					xPawns = 3;
+					yPawns = 2;
+				}
+				else
+				{
+					xPawns = 2;
+					yPawns = 3;
+				}
 				final int initX = boardSquare.getInitialXPosition();
 				final int initY = boardSquare.getInitialYPosition();
 				final int finalX = boardSquare.getFinalXPosition();
@@ -78,8 +96,8 @@ public class BoardView
 				final int xLength = finalX - initX;
 				final int yLength = finalY - initY;
 
-				final int xDiff = xLength / 3;
-				final int yDiff = yLength / 2;
+				final int xDiff = xLength / xPawns;
+				final int yDiff = yLength / yPawns;
 				int x = initX;
 				int y = initY;
 				int count = 1;
@@ -89,7 +107,7 @@ public class BoardView
 					g.fillOval( x + 2, y + 4, 25, 25 );
 
 					count++;
-					if ( count <= 3 )
+					if ( count <= xPawns )
 					{
 						x += xDiff;
 					}
@@ -100,8 +118,9 @@ public class BoardView
 						y += yDiff;
 					}
 				}
-				g.dispose();
+
 			}
+			g.dispose();
 
 		}
 		catch ( final IOException e )
@@ -109,6 +128,13 @@ public class BoardView
 
 		}
 	}
+
+	public void setBoard( final Board board )
+	{
+		this.board = board;
+	}
+
+	private Board board;
 
 	static
 	{

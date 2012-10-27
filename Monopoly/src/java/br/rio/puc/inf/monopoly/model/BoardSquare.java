@@ -21,13 +21,20 @@ public class BoardSquare
 	 * @param initialY
 	 * @param finalX
 	 * @param finalY
+	 * @param isHorizontalSquare
 	 */
-	public BoardSquare( final int initialX, final int initialY, final int finalX, final int finalY )
+	public BoardSquare(
+		final int initialX,
+		final int initialY,
+		final int finalX,
+		final int finalY,
+		final boolean isHorizontalSquare )
 	{
 		setInitialXPosition( initialX );
 		setInitialYPosition( initialY );
 		setFinalXPosition( finalX );
 		setFinalYPosition( finalY );
+		setHorizontalSquare( isHorizontalSquare );
 		setPawnList( new ArrayList<Pawn>() );
 	}
 
@@ -75,6 +82,11 @@ public class BoardSquare
 		return this.initialYPosition;
 	}
 
+	public String getName()
+	{
+		return this.name;
+	}
+
 	/**
 	 * <p>
 	 * </p>
@@ -84,6 +96,11 @@ public class BoardSquare
 	public List<Pawn> getPawnList()
 	{
 		return this.pawnList;
+	}
+
+	public boolean isHorizontalSquare()
+	{
+		return this.horizontalSquare;
 	}
 
 	/**
@@ -108,6 +125,11 @@ public class BoardSquare
 		this.finalYPosition = finalYPosition;
 	}
 
+	public void setHorizontalSquare( final boolean horizontalSquare )
+	{
+		this.horizontalSquare = horizontalSquare;
+	}
+
 	/**
 	 * <p>
 	 * </p>
@@ -128,6 +150,11 @@ public class BoardSquare
 	public void setInitialYPosition( final int initialYPosition )
 	{
 		this.initialYPosition = initialYPosition;
+	}
+
+	public void setName( final String name )
+	{
+		this.name = name;
 	}
 
 	/**
@@ -155,6 +182,8 @@ public class BoardSquare
 	 */
 	private int finalYPosition;
 
+	private boolean horizontalSquare;
+
 	/**
 	 * <p>
 	 * Field <code>initialXPosition</code>
@@ -168,6 +197,8 @@ public class BoardSquare
 	 * </p>
 	 */
 	private int initialYPosition;
+
+	private String name;
 
 	/**
 	 * <p>

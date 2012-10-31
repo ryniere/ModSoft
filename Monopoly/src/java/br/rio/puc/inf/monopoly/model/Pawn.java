@@ -16,6 +16,37 @@ public class Pawn
 	{
 		setBoardSquarePosition( 0 );
 	}
+	
+	public Pawn( String name, float money )
+	{
+		setBoardSquarePosition( 0 );
+		this.name = name;
+		this.money = money;
+	}
+	
+	public Pawn( String name, float money, Color color )
+	{
+		setBoardSquarePosition( 0 );
+		this.name = name;
+		this.money = money;
+		this.color = color;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getMoney() {
+		return money;
+	}
+
+	public void setMoney(float money) {
+		this.money = money;
+	}
 
 	/**
 	 * <p>
@@ -68,5 +99,9 @@ public class Pawn
 	 * </p>
 	 */
 	private Color color;
+	
+	private String name;
+	
+	private float money;
 
 }

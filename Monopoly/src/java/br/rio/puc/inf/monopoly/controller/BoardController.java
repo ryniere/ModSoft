@@ -51,12 +51,14 @@ public class BoardController
 		if ( currentPositionPlusPositionsToJump < boardSquareListSize )
 		{
 			newBoardSquare = boardSquareList.get( currentPositionPlusPositionsToJump );
+			pawn.setBoardSquarePosition( currentPositionPlusPositionsToJump );
 		}
 		else
 		{
 			final int squaresToJumpAtEnd = boardSquareListSize - pawnPosition;
 			final int squaresToJumpAtBegin = numberOfSquaresToJump - squaresToJumpAtEnd;
 			newBoardSquare = boardSquareList.get( squaresToJumpAtBegin );
+			pawn.setBoardSquarePosition( squaresToJumpAtBegin );
 		}
 		newBoardSquare.getPawnList().add( pawn );
 	}
